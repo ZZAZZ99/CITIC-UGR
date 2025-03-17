@@ -40,6 +40,10 @@ else:
 
 h = np.diff(t)  # Diferencias entre valores de t
 
+# Imprimir cada h_i con su índice
+for i, hi in enumerate(h, start=1):
+    print(f"h_{i} = {hi}")
+
 # Paso 2: Construir el sistema de ecuaciones para M (segunda derivada)
 A = np.zeros((n-1, n-1))  # Matriz de coeficientes
 bx = np.zeros(n-1)  # Vector de términos independientes para x
@@ -72,6 +76,14 @@ ay = (My[1:] - My[:-1]) / (6 * h)
 by = My[:-1] / 2
 cy = (y[1:] - y[:-1]) / h - (2 * My[:-1] + My[1:]) * h / 6
 dy = y[:-1]
+
+# Imprimir los polinomios de spline para cada intervalo
+for i in range(n):
+    print(f"Intervalo [{t[i]}, {t[i+1]}]:")
+    print(f"x(t) = {ax[i]:.6f} * (t - {t[i]:.6f})^3 + {bx[i]:.6f} * (t - {t[i]:.6f})^2 + {cx[i]:.6f} * (t - {t[i]:.6f}) + {dx[i]:.6f}")
+    print(f"y(t) = {ay[i]:.6f} * (t - {t[i]:.6f})^3 + {by[i]:.6f} * (t - {t[i]:.6f})^2 + {cy[i]:.6f} * (t - {t[i]:.6f}) + {dy[i]:.6f}")
+    print()
+
 
 # Paso 5: Evaluar la interpolación en puntos intermedios de t
 t_fino = np.linspace(t[0], t[-1], 10000)  # Puntos interpolados, el tercer valor controla la suavidad de la curva

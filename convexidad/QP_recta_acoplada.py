@@ -63,7 +63,7 @@ A_eq = np.ones((1, 2))
 b_eq = np.array([1.0])
 
 # Resolver el QP usando, por ejemplo, el solver OSQP.
-lambda_shared = solve_qp(P, q, G, h_vec, A_eq, b_eq, solver='osqp')
+lambda_shared = solve_qp(P, q, G, h_vec, A_eq, b_eq, solver='highs')
 print("Solución (lambdas compartidas):", lambda_shared)
 
 # ----------------------

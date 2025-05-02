@@ -52,7 +52,7 @@ for i in range(3):
 # ----------------------
 P_qp = 2 * H
 # Añadimos un término lineal que premie λ3:
-alpha = 1.0
+alpha = 0.0
 q_qp = np.array([0.0, 0.0, -alpha])
 
 # ----------------------
@@ -72,11 +72,13 @@ lambda_opt = solve_qp(
     None, None,
     A_eq, b_eq,
     lb, ub,
-    solver='osqp'
+    solver='highs' #Con 'osqp' no funciona hay que añadir le alpha = 1
 )
 
-lambda_opt = np.where(np.abs(lambda_opt) < 1e-3, 0, lambda_opt)
-lambda_opt = np.where(np.abs(lambda_opt) > 1, 1, lambda_opt)
+#print("λ óptimas:", lambda_opt)
+
+#lambda_opt = np.where(np.abs(lambda_opt) < 1e-2, 0, lambda_opt)
+#lambda_opt = np.where(np.abs(lambda_opt) > 0.9, 1, lambda_opt)
 
 print("λ óptimas:", lambda_opt)
 # → debería salir [0, 0, 1]

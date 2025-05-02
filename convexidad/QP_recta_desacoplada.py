@@ -49,7 +49,7 @@ def solve_for_coordinate(A, b):
     A_eq = np.ones((1, 2))
     b_eq = np.array([1.0])
     # Resolver el QP
-    lambda_opt = solve_qp(P, q, G, h_vec, A_eq, b_eq, solver = 'osqp')
+    lambda_opt = solve_qp(P, q, G, h_vec, A_eq, b_eq, solver = 'highs')
     return lambda_opt
 
 # Resolver QP para x(t) y para y(t)
@@ -59,7 +59,7 @@ print("Solución para x (lambdas):", lambda_x)
 print("Solución para y (lambdas):", lambda_y)
 
 # Definir un umbral
-tol = 1e-3
+tol = 1e-7
 
 # Redondear valores muy pequeños a cero para lambda_x y lambda_y
 lambda_x = np.where(np.abs(lambda_x) < tol, 0, lambda_x)
